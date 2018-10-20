@@ -20,7 +20,7 @@ export default class Slide extends Component {
   render() {
     const { places } = this.props;
     return (
-      <Menu right isOpen noOverlay pageWrapId={"map"} outerContainerId={"App"}>
+      <Menu isOpen noOverlay pageWrapId={"map"} outerContainerId={"App"}>
         {places.length < 1 && (
           <div className="theList" aria-label="List of Venues">
             No results
@@ -30,7 +30,7 @@ export default class Slide extends Component {
         {places.length > 0 && (
           <div className="theList" aria-label="List of Venues">
             <ul className="menu-result">
-              {places.map(place => (
+              {places.map((place, index) => (
                 <li
                   role="menuitem"
                   onClick={() => {
@@ -41,7 +41,7 @@ export default class Slide extends Component {
                   id={place.id}
                   key={place.id}
                 >
-                  <br />
+                  <span>{`${(++index).toString()} `}</span>
                   <b>{place.name}</b>
                   <br />
                   <i>{place.location.address}</i>

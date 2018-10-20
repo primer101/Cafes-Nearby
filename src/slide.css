@@ -5,7 +5,7 @@
   height: calc(100% - 75px - 60px - 40px);
 } */
 .theList {
-  margin-top: 15px;
+  margin-top: 10px;
   padding: 0px;
 }
 .menu-result {
@@ -13,20 +13,20 @@
 }
 .menu-result ul {
   width: 100%;
-  padding: 10px;
+  padding: 0;
 }
 .menu-result li {
-  list-style-type: none;
+  /* list-style-type: none; */
   padding: 10px;
   color: #3b3e49;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1.4em;
+  font-size: 1.3em;
   transition: all 300ms ease-in-out;
 }
 .menu-result li i {
   font-weight: normal;
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 .menu-result li:hover {
   color: #f5da9a;

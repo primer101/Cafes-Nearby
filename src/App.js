@@ -31,10 +31,7 @@ class App extends Component {
       places: [],
       markers: [],
       query: "cafe",
-      searchTerm: "",
-      showingInfoWindow: false,
-      activeMarker: {},
-      activePlace: {}
+      searchTerm: ""
     };
   }
 
@@ -95,10 +92,7 @@ class App extends Component {
     this.state.places.forEach((venue, index) => {
       //create marker
       const marker = new window.google.maps.Marker({
-        position: {
-          lat: venue.location.lat,
-          lng: venue.location.lng
-        },
+        position: venue.location,
         map: map,
         id: venue.id,
         label: (++index).toString(),
@@ -111,20 +105,12 @@ class App extends Component {
       marker.addListener("click", function() {
         infoWindow.setContent(`
                                   <h2>${venue.name}</h2>
-                                  <h3>Type: ${
-                                    venue.categories[0].shortName
-                                  }</h3>
-                                  <p>Address:${
-                                    venue.location.formattedAddress[0]
-                                  }
+                                  <p>Address:${venue.location.address}
                                               ${
                                                 venue.location
                                                   .formattedAddress[1]
                                               }
                                   </p>
-                                  <p>lat: ${
-                                    venue.location.lat
-                                  }, long: ${venue.location.lng}</p>
                                   <p> ${'<a href="https://foursquare.com/v/' +
                                     venue.id +
                                     '" target="_blank">Read More on <b>Foursquare</b></a>'} </p>
@@ -161,6 +147,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <Slide places={filteredPlaces} markers={this.state.markers} />
         <header className="App-header">
           <Header />
           <ToolBar
@@ -169,10 +156,7 @@ class App extends Component {
           />
         </header>
         <main className="App-main-content">
-          {/* <Slide places={filteredPlaces} /> */}
-          {/* <div style={{ position: "relative" }}> */}
           <Map />
-          <Slide places={filteredPlaces} markers={this.state.markers} />
           <Footer />
         </main>
       </div>
