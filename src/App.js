@@ -29,6 +29,7 @@ class App extends Component {
     super(props);
     this.state = {
       places: [],
+      filteredPlaces: [],
       markers: [],
       query: "cafe",
       searchTerm: ""
@@ -36,11 +37,28 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getPlaces(END_POINT_EXPLORE, {
+    getData(END_POINT_EXPLORE, {
       limit: 15,
       ll: `${SOHO_NY.lat},${SOHO_NY.lng}`,
       query: this.state.query
-    });
+    })
+      .then(data => {
+        const venues = data.response.groups[0].items.map(item => item.venue);
+        this.setState(
+          {
+            places: venues || [],
+            filteredPlaces: venues || []
+          },
+          () => {
+            console.log("App state changed: ", this.state);
+            this.loadGoogleMapAPI();
+          }
+        );
+        console.log(venues);
+      })
+      .catch(error => {
+        console.log("Error: " + error);
+      });
   }
 
   // Lazy load the Google Map API
@@ -58,38 +76,15 @@ class App extends Component {
     window.initMap = this.initMap;
   };
 
-  getPlaces = (endPoint, parameters) => {
-    getData(endPoint, parameters)
-      .then(data => {
-        const venues = data.response.groups[0].items.map(item => item.venue);
-        // const _markers = this.makeMarkers(venues);
-        this.setState(
-          {
-            places: venues || []
-            // markers: _markers || [],
-          },
-          () => {
-            console.log("App state changed: ", this.state);
-            this.loadGoogleMapAPI();
-          }
-        );
-        console.log(venues);
-      })
-      .catch(error => {
-        console.log("Error: " + error);
-      });
-  };
-
-  initMap = () => {
-    var map = new window.google.maps.Map(document.getElementById("map"), {
-      center: SOHO_NY,
-      zoom: 16
+  makeMarkers(places, map) {
+    const infoWindow = new window.google.maps.InfoWindow({
+      maxWidth: 200,
+      height: 100
     });
-
-    const infoWindow = new window.google.maps.InfoWindow({ maxWidth: 200 });
     this.infoWindow = infoWindow;
+    const result = [];
 
-    this.state.places.forEach((venue, index) => {
+    places.forEach((venue, index) => {
       //create marker
       const marker = new window.google.maps.Marker({
         position: venue.location,
@@ -100,7 +95,6 @@ class App extends Component {
         title: venue.name
       });
 
-      this.state.markers.push(marker);
       // Click on a marker, animation starts and infoWindow opens
       marker.addListener("click", function() {
         infoWindow.setContent(`
@@ -131,34 +125,55 @@ class App extends Component {
         marker.setAnimation(null);
         infoWindow.close(map, marker);
       });
+      result.push(marker);
     });
+    return result;
+  }
+
+  initMap = () => {
+    const map = new window.google.maps.Map(document.getElementById("map"), {
+      center: SOHO_NY,
+      zoom: 16
+    });
+    this.map = map;
+    this.setState({ markers: this.makeMarkers(this.state.places, map) });
   };
 
   onSearchUpdated = term => {
-    this.setState({
-      searchTerm: term
-    });
+    this.setState(
+      {
+        searchTerm: term,
+        filteredPlaces: this.state.places.filter(
+          createFilter(this.state.searchTerm, KEYS_TO_FILTERS)
+        )
+      },
+      () => {
+        this.state.markers.forEach(item => item.setMap(null));
+        this.setState({
+          markers: this.makeMarkers(this.state.filteredPlaces, this.map)
+        });
+      }
+    );
   };
 
   render() {
-    const filteredPlaces = this.state.places.filter(
-      createFilter(this.state.searchTerm, KEYS_TO_FILTERS)
-    );
-
     return (
-      <div className="App">
-        <Slide places={filteredPlaces} markers={this.state.markers} />
+      <div id="App" className="App">
+        <Slide
+          places={this.state.filteredPlaces}
+          markers={this.state.markers}
+        />
         <header className="App-header">
           <Header />
+        </header>
+        <main id="App-main-content" className="App-main-content">
           <ToolBar
             onChange={this.onSearchUpdated}
             value={this.state.searchTerm}
           />
-        </header>
-        <main className="App-main-content">
           <Map />
-          <Footer />
         </main>
+        <Footer />
       </div>
     );
   }

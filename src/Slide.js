@@ -20,7 +20,7 @@ export default class Slide extends Component {
   render() {
     const { places } = this.props;
     return (
-      <Menu isOpen noOverlay pageWrapId={"map"} outerContainerId={"App"}>
+      <Menu noOverlay pageWrapId={"App-main-content"} outerContainerId={"App"}>
         {places.length < 1 && (
           <div className="theList" aria-label="List of Venues">
             No results

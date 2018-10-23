@@ -16,7 +16,7 @@
   padding: 0;
 }
 .menu-result li {
-  /* list-style-type: none; */
+  list-style-type: none;
   padding: 10px;
   color: #3b3e49;
   cursor: pointer;
@@ -29,7 +29,7 @@
   font-size: 0.9em;
 }
 .menu-result li:hover {
-  color: #f5da9a;
+  color: white;
   background: #3b3e49;
 }
 
@@ -45,8 +45,8 @@
   position: fixed;
   width: 35px;
   height: 30px;
-  left: 30px;
-  top: 2vh;
+  left: 20px;
+  top: 3vh;
 }
 
 .bm-burger-bars {
