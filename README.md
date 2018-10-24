@@ -14,7 +14,7 @@ The **Cafes Nearby** is a project from Front-End Web Developer Nanodegree Progra
 
 This is a  map of some cafes in the SOHO area, New York City, as proposed by [Foursquare](https://foursquare.com/). The app allows you to filter the list of venues and their markers in the map as you type. You can click the markers to get more information about the venue.
 
-![Screenshot](./screenshot\cafes.jpg "Screenshot of the App")
+![Screenshot](./screenshot/cafes.jpg "Screenshot of the App")
 
 
 ## How to run the project
