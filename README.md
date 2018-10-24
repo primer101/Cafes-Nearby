@@ -21,7 +21,7 @@ This is a  map of some cafes in the SOHO area, New York City, as proposed by [Fo
 
 To run the project follow the instructions below: 
 
-Download or clone [this repository in your computer](https://github.com/dimakm/TCenter-Eats)
+Download or clone [https://github.com/primer101/Cafes-Nearby.git](https://github.com/primer101/Cafes-Nearby.git)
 
 Change directory to the repository folder, example cd c:/my-app and then in the repository folder:
 * install project dependencies with 
