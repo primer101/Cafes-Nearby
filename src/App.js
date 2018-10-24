@@ -66,7 +66,7 @@ class App extends Component {
     const refScript = window.document.getElementsByTagName("script")[0];
     const script = window.document.createElement("script");
     script.src =
-      "https://maps.googleapis.com/maps/api/js?key=[Your Google API]&callback=initMap";
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyAkUguQ-B0QLbbOymXiRYv4f6LT429zS04&callback=initMap";
     script.async = true;
     script.defer = true;
     refScript.parentNode.insertBefore(script, refScript);
