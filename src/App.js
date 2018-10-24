@@ -10,7 +10,7 @@ import Slide from "./Slide";
 import { createFilter } from "react-search-input";
 
 const END_POINT_EXPLORE = "https://api.foursquare.com/v2/venues/explore";
-const END_POINT_DETAIL = "https://api.foursquare.com/v2/venues/";
+// const END_POINT_DETAIL = "https://api.foursquare.com/v2/venues/";
 
 const SOHO_NY = {
   lat: 40.7243,

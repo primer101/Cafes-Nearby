@@ -4,7 +4,7 @@
   background: blue;
   height: calc(100% - 75px - 60px - 40px);
 } */
-.theList {
+.slide-list-venue {
   margin-top: 10px;
   padding: 0px;
 }
@@ -33,20 +33,13 @@
   background: #3b3e49;
 }
 
-/* .searchBar {
-  padding: 20px 5px 5px 10px;
-} */
-
-#Error-alert {
-}
-
 /*-----burger menu, reference https://www.npmjs.com/package/react-burger-menu ------*/
 .bm-burger-button {
   position: fixed;
   width: 35px;
   height: 30px;
   left: 20px;
-  top: 3vh;
+  top: 15px;
 }
 
 .bm-burger-bars {

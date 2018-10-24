@@ -22,13 +22,13 @@ export default class Slide extends Component {
     return (
       <Menu noOverlay pageWrapId={"App-main-content"} outerContainerId={"App"}>
         {places.length < 1 && (
-          <div className="theList" aria-label="List of Venues">
+          <div className="slide-list-venue" aria-label="No Venues">
             No results
           </div>
         )}
 
         {places.length > 0 && (
-          <div className="theList" aria-label="List of Venues">
+          <div className="slide-list-venue" aria-label="List of Venues">
             <ul className="menu-result">
               {places.map((place, index) => (
                 <li

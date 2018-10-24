@@ -17,6 +17,7 @@ export default class ToolBar extends Component {
             <SearchInput
               {...this.props}
               className="search-input"
+              aria-label="Search Cafes"
               // className="toolbar-search-input"
               ref="autocomplete"
               type="text"

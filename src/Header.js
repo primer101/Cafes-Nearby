@@ -3,9 +3,9 @@ require("./header.css");
 
 function Header() {
   return (
-    <nav>
+    <nav className="nav">
       <h1>
-        <a href="/">Coffee Places</a>
+        <a href="/">Cafes Nearby</a>
       </h1>
     </nav>
   );
